@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Outfit Generator</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4a90e2;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #357ab8;
+        }
+
+        #search-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .search-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .search-item p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .search-item button {
+            padding: 8px 12px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .search-item button:hover {
+            background-color: #218838;
+        }
+
+        #selected-items-section {
+            margin-top: 30px;
+        }
+
+        #selected-items {
+            list-style: none;
+            margin: 10px 0;
+            padding: 0;
+        }
+
+        #selected-items li {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+
+        #generate-outfit-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            background-color: #ffc107;
+            border: none;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #generate-outfit-button:hover {
+            background-color: #e0a800;
+        }
+
+        #generated-outfit {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #generated-outfit img {
+            max-width: 500px; /* Increased image size */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        #generated-outfit p {
+            font-size: 1rem;
+            color: #555;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+            background-color: #f1f1f1;
+            color: #555;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fashion Outfit Generator</h1>
+        <p>Discover and create stunning outfits effortlessly.</p>
+    </header>
+
+    <div class="container">
+        <!-- Search Section -->
+        <div id="search-container">
+            <input type="text" id="query-input" placeholder="Search for clothing items...">
+            <button id="search-button">Search</button>
+        </div>
+
+        <div id="search-results">
+            <!-- Search results will appear here -->
+        </div>
+
+        <!-- Selected Items Section -->
+        <div id="selected-items-section">
+            <h2>Selected Items</h2>
+            <ul id="selected-items">
+                <!-- Selected items will appear here -->
+            </ul>
+            <button id="generate-outfit-button">Generate Outfit</button>
+        </div>
+
+        <!-- Generated Outfit -->
+        <div id="generated-outfit">
+            <img src="" alt="Generated Outfit" id="generated-outfit-image">
+            <p id="generated-outfit-label">Generated Outfit</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Fashion Outfit Generator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('search-button').addEventListener('click', function () {
+            const query = document.getElementById('query-input').value;
+            if (!query) return alert('Please enter a search term.');
+
+            fetch('/search-item', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: query, category: 'Clothing' })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const searchResults = document.getElementById('search-results');
+                    searchResults.innerHTML = '';
+                    data.results.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('search-item');
+                        itemElement.innerHTML = `
+                            <img src="${item.thumbnail}" alt="${item.title}">
+                            <p>${item.title}</p>
+                            <button onclick="addItemToOutfit('${item.title}', '${item.thumbnail}')">Add to Outfit</button>
+                        `;
+                        searchResults.appendChild(itemElement);
+                    });
+                })
+                .catch(error => console.error('Error searching for items:', error));
+        });
+
+        let selectedItems = [];
+
+        function addItemToOutfit(title, thumbnail) {
+            selectedItems.push({ query: title, category: 'Clothing', link: thumbnail });
+            updateSelectedItems();
+        }
+
+        function updateSelectedItems() {
+            const selectedItemsList = document.getElementById('selected-items');
+            selectedItemsList.innerHTML = '';
+            selectedItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item.query;
+                selectedItemsList.appendChild(listItem);
+            });
+        }
+
+        document.getElementById('generate-outfit-button').addEventListener('click', function () {
+            if (selectedItems.length === 0) {
+                return alert('Please add items to your outfit first.');
+            }
+
+            fetch('/generate-outfit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(selectedItems)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const generatedOutfitImage = document.getElementById('generated-outfit-image');
+                    const generatedOutfitLabel = document.getElementById('generated-outfit-label');
+
+                    generatedOutfitImage.src = data.image_url;
+                    generatedOutfitImage.style.display = 'block';
+                    generatedOutfitLabel.style.display = 'block';
+                })
+                .catch(error => console.error('Error generating outfit:', error));
+        });
+    </script>
+</body>
+</html>

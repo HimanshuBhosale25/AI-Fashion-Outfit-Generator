@@ -1,0 +1,7 @@
+fastapi 
+uvicorn 
+requests 
+pydantic
+jinja2
+python-dotenv
+openai==0.28
