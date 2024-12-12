@@ -105,3 +105,4 @@ There is always room for improvement! Here are some potential future enhancement
 - **Social Sharing:** Enable users to share their generated outfits on social media platforms.
 - **Enhanced AI Descriptions:** Utilize more advanced AI models to generate even more detailed and personalized outfit descriptions.
 - **Multi-Website Searches:** Currently, the app searches items from Myntra, but it can be extended to support searches from other websites like Amazon, eBay, and more.
+- **Price Comparison:** Add functionality to compare prices of the same items across different websites to help users find the best deals.
