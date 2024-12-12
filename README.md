@@ -89,13 +89,13 @@ This project utilizes several AI technologies to provide an enhanced user experi
 *Selected Options:-*
 ![Selected Options](images/Screenshot%202024-12-12%20042659.png)
 
-*Generated Outfit1:-* 
+*Generated Outfit 1:-* 
 ![Generated Outfit1](images/Screenshot%202024-12-12%20042400.png)
 
-*Generated Outfit2:-*
+*Generated Outfit 2:-*
 ![Generated Outfit2](images/Screenshot%202024-12-12%20042801.png)
 
-*Generated Outfit3:-*
+*Generated Outfit 3:-*
 ![Generated Outfit3](images/Screenshot%202024-12-12%20042847.png)
 
 ## Future Improvements 🔮
