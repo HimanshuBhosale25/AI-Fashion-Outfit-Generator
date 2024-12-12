@@ -74,29 +74,29 @@ This project utilizes several AI technologies to provide an enhanced user experi
     - **Output:** A high-quality image
 
 ## Screenshots 📸
+*Home Page:-*
 ![Home Page](images/Screenshot%202024-12-12%20041829.png)
-*Home Page*
 
+*Top Wear:-*
 ![Top Wear](images/Screenshot%202024-12-12%20042121.png)
-*Top Wear*
 
+*Bottom Wear:-*
 ![Bottom Wear](images/Screenshot%202024-12-12%20042627.png)
-*Bottom Wear*
 
+*Footwear:-*
 ![Footwear](images/Screenshot%202024-12-12%20042236.png)
-*Footwear*
 
+*Selected Options:-*
 ![Selected Options](images/Screenshot%202024-12-12%20042659.png)
-*Selected Options*
 
+*Generated Outfit1:-* 
 ![Generated Outfit1](images/Screenshot%202024-12-12%20042400.png)
-*Generated Outfit1* 
 
+*Generated Outfit2:-*
 ![Generated Outfit2](images/Screenshot%202024-12-12%20042801.png)
-*Generated Outfit2*
 
+*Generated Outfit3:-*
 ![Generated Outfit3](images/Screenshot%202024-12-12%20042847.png)
-*Generated Outfit3*
 
 ## Future Improvements 🔮
 There is always room for improvement! Here are some potential future enhancements:
